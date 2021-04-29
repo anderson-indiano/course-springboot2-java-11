@@ -1,18 +1,19 @@
-@RestController permite definir um controller com características REST, serializa os dados e retorna um response com os dados;
+@RestController permite definir um controller com características REST, serializa os dados e retorna um response json;
 @Autowired delega ao Spring Boot a inicialização do objeto;
 @RequestMapping permite definir uma rota. Caso não seja informado o método HTTP da rota,ela será definida para todos os métodos.
 @PathVariable indica que o valor da variável virá de uma informação da rota;
 @RequestBody indica que o valor do objeto virá do corpo da requisição;
 @Valid indica que os dados recebidos devem ser validados.
-@ComponentScan(basePackages = "com.devdodjo.springboot.controller") busca o endopoint dentro do pacote onde esta definido na classe.
+@ComponentScan(basePackages = "com.springboot.controller") busca o endopoint dentro do pacote onde esta definido na classe.
 @EnableAutoConfiguration configura a aplicação de acordo com as dependencias do pom.xml
 @Configuration configuração as classes para retorna xml para objetos em java.
 
 @Entity = Define que a classe é um entidade/model
 @Id = Define que o atributo é um id
-@GeneratedValue = Define que a geração do valor do id da entidade será gerenciada pelo provedor de persistência (JPA)
+@GeneratedValue(strategy = GenerationType.IDENTITY) = Define que a geração do valor do id será gerenciada e incrementada pelo provedor de persistência (JPA)
 @Column(value = "nomeColuna")
 @Service = Define uma classe de Serviço
+@Repository = Define uma classe de Persistência
 @Autowired = Define pontos de injeção de dependencias dentro de uma classe
 @RestController = Define uma classe que contém métodos para uma API RESTful
 @RequestMapping = Mapeia requisições REST
@@ -20,3 +21,4 @@
 @PathVariable = Permite receber parâmetros via {} em uma requisição
 @RequestBody = Permite receber parâmetros de uma Model em uma requisição
 @ModelAttribute = Define o atributo modelAttribute que será utilizado em um form HTML
+@Bean = Spring criar um objeto e deixa-o disponível para outras classes utilizarem como dependência.
