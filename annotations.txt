@@ -1,24 +1,46 @@
-@RestController permite definir um controller com características REST, serializa os dados e retorna um response json;
-@Autowired delega ao Spring Boot a inicialização do objeto;
-@RequestMapping permite definir uma rota. Caso não seja informado o método HTTP da rota,ela será definida para todos os métodos.
-@PathVariable indica que o valor da variável virá de uma informação da rota;
-@RequestBody indica que o valor do objeto virá do corpo da requisição;
-@Valid indica que os dados recebidos devem ser validados.
-@ComponentScan(basePackages = "com.springboot.controller") busca o endopoint dentro do pacote onde esta definido na classe.
-@EnableAutoConfiguration configura a aplicação de acordo com as dependencias do pom.xml
-@Configuration configuração as classes para retorna xml para objetos em java.
+@RestController = permite definir um controller com características REST, serializa os dados e retorna JSON na resposta da requisição.
+@Autowired = delega ao Spring Boot a inicialização do objeto;
+@RequestMapping = permite definir uma rota. Caso não seja informado o método HTTP da rota,ela será definida para todos os métodos.
+@PathVariable = indica que o valor da variável virá de uma informação da rota;
+@RequestBody = indica que o valor do objeto virá do corpo da requisição;
+@Valid = indica que os dados recebidos devem ser validados.
+@ComponentScan(basePackages = "com.springboot.controller") = busca o endopoint dentro do pacote onde esta definido na classe.
+@EnableAutoConfiguration = configura a aplicação de acordo com as dependencias do pom.xml
+@Configuration = configuração as classes para retorna xml para objetos em java.
 
 @Entity = Define que a classe é um entidade/model
 @Id = Define que o atributo é um id
 @GeneratedValue(strategy = GenerationType.IDENTITY) = Define que a geração do valor do id será gerenciada e incrementada pelo provedor de persistência (JPA)
 @Column(value = "nomeColuna")
-@Service = Define uma classe de Serviço
-@Repository = Define uma classe de Persistência
+
+@Repository = Associada com classes que isolam o acesso aos dados da sua aplicação. Comumente associada a DAO’s.
+@Service = Associada com classes que representam a ideia do Service do Domain Driven Design.
 @Autowired = Define pontos de injeção de dependencias dentro de uma classe
 @RestController = Define uma classe que contém métodos para uma API RESTful
-@RequestMapping = Mapeia requisições REST
-@Controller = Define uma classe que contém métodos para estrutura Spring MVC
+@Controller = Associada com classes que possuem métodos que processam requests numa aplicação web.
 @PathVariable = Permite receber parâmetros via {} em uma requisição
-@RequestBody = Permite receber parâmetros de uma Model em uma requisição
+@ResponseBody = Utilizada em métodos anotados com @RequestMapping para indicar que o retorno do método deve ser automaticamente escrito na resposta para o cliente.Retornar JSON ou XML.
 @ModelAttribute = Define o atributo modelAttribute que será utilizado em um form HTML
-@Bean = Spring criar um objeto e deixa-o disponível para outras classes utilizarem como dependência.
+@Component = A annotation básica que indica que uma classe vai ser gerenciada pelo container do Spring.
+
+@Data = (Lombok) Define os Getters e Setters incapsulados.
+@Getter = (Lombok) Define os Getters incapsulados.
+@Setter = (Lombok) Define os Setters incapsulados.
+@NoArgsConstructor = (Lombok) Define o Construtor vazio.
+@AllArgsConstructor = (Lombok) Define o Construtor com todos os atributos.
+@ToString(exclude="id") = Gerar por padrão uma string com todos os atributos da classe.
+@EqualsAndHashCode(exclude={"firstName", "lastName", "gender"}) = Gerar os métodos equals() e hashCode() por padrão ele usará todos os campos da classe.
+@Builder = (Lombok) criar objetos sem precisar de construtores e sem métodos setters na classe. 
+@Slf4j @Log @CommonsLog = (Lombok) criar uma instância de um Logger.
+
+@Configuration = É uma annotation que indica que determinada classe possui métodos que expõe novos beans.
+@ComponentScan = Em geral você a usa em classes de configuração(@Configuration) indicando quais pacotes ou classes devem ser scaneadas pelo Spring para que essa configuração funcione.
+@Bean = Anotação utilizada em cima dos métodos de uma classe, geralmente marcada com @Configuration, indicando que o Spring deve invocar aquele método e gerenciar o objeto retornado por ele. Quando digo gerenciar é que agora este objeto pode ser injetado em qualquer ponto da sua aplicação.
+@Autowired = Anotação utilizada para marcar o ponto de injeção na sua classe. Você pode colocar ela sobre atributos ou sobre o seu construtor com argumentos.
+@Scope = Annotation utilizada para marcar o tempo de vida de um objeto gerenciado pelo container. Pode ser utilizada em classes anotadas com @Component, ou alguma de suas derivações. Além disso também pode usada em métodos anotados com @Bean. 
+@RequestMapping = Geralmente utilizada em cima dos métodos de uma classe anotada com @Controller. Serve para você colocar os endereços da sua aplicação que, quando acessados por algum cliente, deverão ser direcionados para o determinado método.
+@Primary = Caso você tenha dois métodos anotados com @Bean e com ambos retornando o mesmo tipo de objeto, como o Spring vai saber qual dos dois injetar por default em algum ponto da sua aplicação? @Primary. Indica qual é a opção padrão de injeção. Senão default, pode recorrer a annotation @Qualifier.
+@Profile = Indica em qual profile tal bean deve ser carregado. Muito comum quando você tem classes que só devem ser carregadas em ambiente de dev ou de produção dentro do Spring.
+@SpringBootApplication = Para quem usa Spring Boot, essa é uma das primeiras que você. Ela engloba a @Component, @ComponentScan e mais uma chamada @EnableAutoConfiguration, que é utilizada pelo Spring Boot para tentar advinhar as configurações necessárias para rodar o seu projeto.
+@EnableAsync = Essa annotation deve ser colocada em alguma classe marcada com @Configuration, para que o Spring habilite o suporte a execução assíncrona.
+@Async = Quando habilita uso de execução de métodos assíncronos com a @EnableAsync, você pode marcar qualquer método de um bean gerenciado do projeto com essa annotation. Quando tal método for invocado, o Spring vai garantir que a execução dele será em outra thread.
