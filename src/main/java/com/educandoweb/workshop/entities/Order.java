@@ -11,14 +11,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_order")
-@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"moment", "client"})
 public class Order implements Serializable{
 
@@ -27,9 +31,18 @@ public class Order implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter @Setter private Long id;
 	
+	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
 	@Getter @Setter private Instant moment;
 	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	@Getter @Setter private User client;
+
+	public Order(Long id, Instant moment, User client) {
+		super();
+		this.id = id;
+		this.moment = moment;
+		this.client = client;
+	}
+	
 }
