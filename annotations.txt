@@ -12,7 +12,7 @@
 @Id = Define que o atributo é um id
 @GeneratedValue(strategy = GenerationType.IDENTITY) = Define que a geração do valor do id será gerenciada e incrementada pelo provedor de persistência (JPA)
 @Column(value = "nomeColuna")
-
+@Transientanotação JPA é usada para indicar que um campo não deve ser persistido no banco de dados.
 @Repository = Associada com classes que isolam o acesso aos dados da sua aplicação. Comumente associada a DAO’s.
 @Service = Associada com classes que representam a ideia do Service do Domain Driven Design.
 @Autowired = Define pontos de injeção de dependencias dentro de uma classe

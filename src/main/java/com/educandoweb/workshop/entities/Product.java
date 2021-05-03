@@ -15,11 +15,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Entity
-@Table(name = "tb_category")
+@Table(name = "tb_product")
 @EqualsAndHashCode
-public class Category implements Serializable{
+public class Product implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,18 +26,23 @@ public class Category implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter @Setter private Long id;
 	@Getter @Setter private String name;
-	
+	@Getter @Setter private String description;
+	@Getter @Setter private Double price;
+	@Getter @Setter private String imUrl;
+
 	@Transient
-	@Getter private Set<Product> products = new HashSet<>();
-	
-	public Category() {
+	@Getter private Set<Category> categories = new HashSet<>();
+
+	public Product() {
 		super();
 	}
-	
-	public Category(Long id, String name) {
+
+	public Product(Long id, String name, String description, Double price, String imUrl) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.imUrl = imUrl;
 	}
-
 }

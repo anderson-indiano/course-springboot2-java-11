@@ -14,16 +14,13 @@ import javax.persistence.Table;
 import com.educandoweb.workshop.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_order")
-@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"moment", "client"})
 public class Order implements Serializable{
 
@@ -40,6 +37,10 @@ public class Order implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	@Getter @Setter private User client;
+	
+	public Order() {
+		super();
+	}
 
 	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
 		super();
@@ -60,5 +61,4 @@ public class Order implements Serializable{
 			throw new IllegalStateException("OrderStatus was null");
 		}
 	}
-
 }
