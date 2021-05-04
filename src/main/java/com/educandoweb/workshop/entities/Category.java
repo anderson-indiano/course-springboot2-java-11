@@ -15,11 +15,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Entity
 @Table(name = "tb_category")
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"name", "products"})
 public class Category implements Serializable{
 
@@ -33,10 +35,6 @@ public class Category implements Serializable{
 	@JsonIgnore
 	@ManyToMany(mappedBy = "categories")
 	@Getter private Set<Product> products = new HashSet<>();
-	
-	public Category() {
-		super();
-	}
 	
 	public Category(Long id, String name) {
 		super();

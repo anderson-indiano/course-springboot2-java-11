@@ -15,10 +15,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_user")
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"name", "email", "phone", "password"})
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -34,10 +36,6 @@ public class User implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	@Getter private List<Order> orders = new ArrayList<>();
-	
-	public User() {
-		super();
-	}
 
 	public User(Long id, String name, String email, String phone, String password) {
 		super();

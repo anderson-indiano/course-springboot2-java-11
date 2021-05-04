@@ -15,10 +15,12 @@ import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_product")
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"name", "description", "price", "imUrl", "categories"})
 public class Product implements Serializable{
 
@@ -35,10 +37,6 @@ public class Product implements Serializable{
 	@ManyToMany
 	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	@Getter private Set<Category> categories = new HashSet<>();
-
-	public Product() {
-		super();
-	}
 
 	public Product(Long id, String name, String description, Double price, String imUrl) {
 		super();

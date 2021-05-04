@@ -17,10 +17,12 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_order")
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"moment", "client"})
 public class Order implements Serializable{
 
@@ -37,10 +39,6 @@ public class Order implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	@Getter @Setter private User client;
-	
-	public Order() {
-		super();
-	}
 
 	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
 		super();

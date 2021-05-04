@@ -33,6 +33,12 @@
 @Builder = (Lombok) criar objetos sem precisar de construtores e sem métodos setters na classe. 
 @Slf4j @Log @CommonsLog = (Lombok) criar uma instância de um Logger.
 
+@Embedded = Marco o atributo da composição com a anotação.
+@Embeddable = Marco a classe compositora com a anotação.
+@ManyToMany = Define uma associação com outra entidade que tenha a multiplicidade de muitos-para-muitos.
+@ManyToOne = Define uma associação com outra entidade que tenha a multiplicidade de muitos-para-muitos.
+@JoinColumn(name = "client_id") = Define uma chave estrangeira para o atributo.
+
 @Configuration = É uma annotation que indica que determinada classe possui métodos que expõe novos beans.
 @ComponentScan = Em geral você a usa em classes de configuração(@Configuration) indicando quais pacotes ou classes devem ser scaneadas pelo Spring para que essa configuração funcione.
 @Bean = Anotação utilizada em cima dos métodos de uma classe, geralmente marcada com @Configuration, indicando que o Spring deve invocar aquele método e gerenciar o objeto retornado por ele. Quando digo gerenciar é que agora este objeto pode ser injetado em qualquer ponto da sua aplicação.
