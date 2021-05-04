@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,7 +24,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "tb_product")
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"name", "description", "price", "imUrl", "categories"})
+@EqualsAndHashCode(exclude = {"name", "description", "price", "imUrl", "categories", "items"})
 public class Product implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -37,6 +40,9 @@ public class Product implements Serializable{
 	@ManyToMany
 	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	@Getter private Set<Category> categories = new HashSet<>();
+	
+	@OneToMany(mappedBy = "id.product")
+	private Set<OrderItem> items = new HashSet<>();
 
 	public Product(Long id, String name, String description, Double price, String imUrl) {
 		super();
@@ -46,4 +52,21 @@ public class Product implements Serializable{
 		this.price = price;
 		this.imUrl = imUrl;
 	}
+	
+	@JsonIgnore
+	public Set<Order> getOrders() {
+		Set<Order> set = new HashSet<>();
+		for (OrderItem orderItem : items) {
+			set.add(orderItem.getOrder());
+		}
+		return set;
+	}
 }
+
+
+
+
+
+
+
+
