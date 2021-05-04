@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.educandoweb.workshop.entities.Category;
 import com.educandoweb.workshop.entities.Order;
 import com.educandoweb.workshop.entities.OrderItem;
+import com.educandoweb.workshop.entities.Payment;
 import com.educandoweb.workshop.entities.Product;
 import com.educandoweb.workshop.entities.User;
 import com.educandoweb.workshop.entities.enums.OrderStatus;
@@ -80,5 +81,10 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem oi4 = new OrderItem(order3, product5, 2, product5.getPrice()); 
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Payment payment1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), order1);
+		order1.setPayment(payment1);
+		
+		orderRepository.save(order1);
 	}
 }
