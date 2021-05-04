@@ -2,6 +2,8 @@ package com.educandoweb.workshop.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.educandoweb.workshop.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,7 +27,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "tb_order")
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"moment", "client"})
+@EqualsAndHashCode(exclude = {"moment", "client", "items"})
 public class Order implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -39,6 +43,9 @@ public class Order implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	@Getter @Setter private User client;
+	
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> items = new HashSet<>();
 
 	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
 		super();
@@ -59,4 +66,16 @@ public class Order implements Serializable{
 			throw new IllegalStateException("OrderStatus was null");
 		}
 	}
+	
+	public Set<OrderItem> getItems() {
+		return items;
+	}
 }
+
+
+
+
+
+
+
+
