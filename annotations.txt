@@ -30,8 +30,8 @@
 @AllArgsConstructor = (Lombok) Define o Construtor com todos os atributos.
 @ToString(exclude="id") = Gerar por padrão uma string com todos os atributos da classe.
 @EqualsAndHashCode(exclude={"firstName", "lastName", "gender"}) = Gerar os métodos equals() e hashCode() por padrão ele usará todos os campos da classe.
-@Builder = (Lombok) criar objetos sem precisar de construtores e sem métodos setters na classe. 
-@Slf4j @Log @CommonsLog = (Lombok) criar uma instância de um Logger.
+@Builder = (Lombok) Criar objetos sem precisar de construtores e sem métodos setters na classe. 
+@Slf4j @Log @CommonsLog = (Lombok) Criar uma instância de um Logger.
 
 @Embedded = Marco o atributo da composição com a anotação.
 @Embeddable = Marco a classe compositora com a anotação.
