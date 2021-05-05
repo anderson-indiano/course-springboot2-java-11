@@ -20,7 +20,7 @@ public class ProductService {
 	}
 	
 	public Product findById(Long id) {
-		Optional<Product> obj = productRepository.findById(id);
-		return obj.get();
+		Optional<Product> product = productRepository.findById(id);
+		return product.get();
 	}
 }
